@@ -18,7 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('apps.users.urls')),
-
     # url(r'^userlogin/', include('apps.user_login.urls')),
-    url(r'^admin/', admin.site.urls),
-  ]
+    url(r'^admin/', admin.site.urls)
+    ]

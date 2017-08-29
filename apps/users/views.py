@@ -8,6 +8,7 @@ from __future__ import unicode_literals
 from .models import User
 from django.contrib.messages import error
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def index(request):
@@ -42,6 +43,11 @@ def create(request):
         email=request.POST['email'],
     )
     return redirect('/users')
+
+
+def login(request):
+
+    return render(request, 'users/', context)
 
 def edit(request, user_id):
     context = {

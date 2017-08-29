@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import re
 from django.db import models
+import bcrypt
+import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 
@@ -41,7 +42,8 @@ class UserManager(models.Manager):
 
         def validate_log(self, post_data):
             errors = {}
-            current_user = User.objects.filter(email=post_data['email'])
+            current_user = User.objects.filter(email=post_data["email"])
+            print (User.objects.filter(email=post_data["email"]))
             if not current_user:
                 errors.appends(['accounts', "Email or password is incorrect"])
             elif not bcrypt.checkpw(post_data['password'].encode(), current_user[0].hashpw.encode()):
@@ -61,5 +63,5 @@ class User(models.Model):
     objects = UserManager()
 
 
-    def __str__(self):
-        return self.email
+    # def __str__(self):
+    #     return self.email
